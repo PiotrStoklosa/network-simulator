@@ -23,15 +23,15 @@ public class ScenarioFileParserImpl implements ScenarioFileParser {
     @Override
     public ScenarioSchema parseJSONFile(File resource) {
         try {
-            LOGGER.info("Read value from JSON file");
+            LOGGER.info("Read value from JSON file: " + resource.getName());
 
             ScenarioSchema scenarioSchema = mapper.readValue(resource, ScenarioSchema.class);
 
-            LOGGER.info("Read value from JSON file successfully");
+            LOGGER.info("Read value from JSON file successfully: " + resource.getName());
 
             return scenarioSchema;
         } catch (IOException e) {
-            LOGGER.error(e.getStackTrace());
+            LOGGER.error(e.getMessage());
             return null;
         }
     }
