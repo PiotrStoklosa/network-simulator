@@ -18,27 +18,27 @@
       "steps" : [
         { "turn": 10,
           "localization" : { "x" : 10, "y" : 11},
-          "action" : "start" },
+          "action" : "START" },
         { "turn": 12,
           "localization" : { "x" : 10, "y" : 12},
-          "action" : "move" },
+          "action" : "MOVE" },
         { "turn": 15,
           "localization" : { "x" : 10, "y" : 12},
-          "action" : "end" }
+          "action" : "END" }
       ]},
     {"name" : "UE2",
       "steps" : [
         { "turn": 5,
           "localization" : { "x" : 20, "y" : 18},
-          "action" : "start" },
+          "action" : "START" },
         { "turn": 6,
           "localization" : { "x" : 22, "y" : 18},
-          "action" : "move" },
+          "action" : "MOVE" },
         { "turn": 7,
           "localization" : { "x" : 24, "y" : 18},
-          "action" : "move" },
+          "action" : "MOVE" },
         { "turn": 8,
           "localization" : { "x" : 24, "y" : 16},
-          "action" : "end" }
+          "action" : "END" }
       ]}
   ]

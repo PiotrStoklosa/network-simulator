@@ -5,8 +5,9 @@ import com.nokia.uwr.scenario.ScenarioSchema;
 import java.io.File;
 
 /**
- * @author MiSobecki
  * Interface for classes which parse files into ScenarioSchema instance
+ *
+ * @author MiSobecki
  */
 public interface ScenarioFileParser {
     /**
@@ -14,7 +15,8 @@ public interface ScenarioFileParser {
      *
      * @param resource JSON file to parse from
      * @return schema of scenario
+     * @throws IllegalArgumentException thrown if resource is null
      */
-    ScenarioSchema parseJSONFile(File resource);
+    ScenarioSchema parseJSONFile(File resource) throws IllegalArgumentException;
 
 }

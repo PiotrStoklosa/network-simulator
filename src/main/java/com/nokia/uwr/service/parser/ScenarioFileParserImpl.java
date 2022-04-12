@@ -11,8 +11,9 @@ import java.io.File;
 import java.io.IOException;
 
 /**
- * @author MiSobecki
  * Class to parse files into ScenarioSchema instance
+ *
+ * @author MiSobecki
  */
 @Service
 @RequiredArgsConstructor
@@ -21,13 +22,15 @@ public class ScenarioFileParserImpl implements ScenarioFileParser {
     private static final Logger LOGGER = LogManager.getLogger(ScenarioFileParserImpl.class);
 
     @Override
-    public ScenarioSchema parseJSONFile(File resource) {
+    public ScenarioSchema parseJSONFile(File resource) throws IllegalArgumentException {
+        if (resource == null) throw new IllegalArgumentException("Resource file is null");
+
         try {
             LOGGER.info("Read value from JSON file: " + resource.getName());
 
             ScenarioSchema scenarioSchema = mapper.readValue(resource, ScenarioSchema.class);
 
-            LOGGER.info("Read value from JSON file successfully: " + resource.getName());
+            LOGGER.info("Read value from JSON file successfully");
 
             return scenarioSchema;
         } catch (IOException e) {
