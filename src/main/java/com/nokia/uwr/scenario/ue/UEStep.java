@@ -8,5 +8,5 @@ import com.nokia.uwr.board.Localization;
  * @param action       action which UE take
  * @author MiSobecki
  */
-public record UEStep(int turn, Localization localization, String action) {
+public record UEStep(int turn, Localization localization, UEAction action) {
 }
