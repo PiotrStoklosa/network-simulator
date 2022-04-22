@@ -14,7 +14,7 @@
       "signalPower" : 38}
   ],
   "ueScenarios" : [
-    {"name" : "UE1",
+    {"ue" : {"name" : "UE1"},
       "steps" : [
         { "turn": 10,
           "localization" : { "x" : 10, "y" : 11},
@@ -26,7 +26,7 @@
           "localization" : { "x" : 10, "y" : 12},
           "action" : "END" }
       ]},
-    {"name" : "UE2",
+    {"ue" : {"name" : "UE2"},
       "steps" : [
         { "turn": 5,
           "localization" : { "x" : 20, "y" : 18},
