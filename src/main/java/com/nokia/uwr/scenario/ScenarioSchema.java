@@ -2,6 +2,7 @@ package com.nokia.uwr.scenario;
 
 import com.nokia.uwr.scenario.bts.BTSDescription;
 import com.nokia.uwr.scenario.ue.UEScenario;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
@@ -11,4 +12,5 @@ import java.util.List;
  * @author MiSobecki
  */
 public record ScenarioSchema(List<BTSDescription> btsDescriptions, List<UEScenario> ueScenarios) {
+
 }
