@@ -1,6 +1,7 @@
 package com.nokia.uwr.service.parser;
 
 import com.nokia.uwr.board.Localization;
+import com.nokia.uwr.model.UE;
 import com.nokia.uwr.scenario.ScenarioSchema;
 import com.nokia.uwr.scenario.bts.BTSDescription;
 import com.nokia.uwr.scenario.ue.UEAction;
@@ -42,11 +43,11 @@ class ScenarioFileParserImplTest {
 
         List<UEScenario> ues = new ArrayList<>(
                 List.of(
-                        new UEScenario("UE1", new ArrayList<>(
+                        new UEScenario(new UE("UE1"), new ArrayList<>(
                                 List.of(new UEStep(10, new Localization(10, 11), UEAction.START),
                                         new UEStep(12, new Localization(10, 12), UEAction.MOVE),
                                         new UEStep(15, new Localization(10, 12), UEAction.END)))),
-                        new UEScenario("UE2", new ArrayList<>(
+                        new UEScenario(new UE("UE2"), new ArrayList<>(
                                 List.of(new UEStep(5, new Localization(20, 18), UEAction.START),
                                         new UEStep(6, new Localization(22, 18), UEAction.MOVE),
                                         new UEStep(7, new Localization(24, 18), UEAction.MOVE),

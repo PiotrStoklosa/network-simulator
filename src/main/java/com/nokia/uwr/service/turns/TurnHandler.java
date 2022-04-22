@@ -13,7 +13,7 @@ public interface TurnHandler {
      * @param TurnNumber Turn number that we want to find and perform actions for.
      * @author najedzony
      */
-    void FindAndDoActionsForThisTurn(int TurnNumber);
+    void findAndDoActionsForThisTurn(int TurnNumber);
 
     /**
      * @param scenario Scenario object that we want to get.
