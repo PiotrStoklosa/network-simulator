@@ -20,13 +20,11 @@ import java.util.Map;
 public class CalculationSignalServiceImpl implements CalculationSignalService {
 
     Board board;
-    SignalParser signalParser;
     private static final Logger LOGGER = LogManager.getLogger(CalculationSignalServiceImpl.class);
 
     @Autowired
-    public CalculationSignalServiceImpl(Board board, SignalParser signalParser) {
+    public CalculationSignalServiceImpl(Board board) {
         this.board = board;
-        this.signalParser = signalParser;
     }
 
 
@@ -40,6 +38,8 @@ public class CalculationSignalServiceImpl implements CalculationSignalService {
     @Override
     public Map<BTS, Integer> calculateSignal(UE ue) {
         Map<BTS, Integer> UeSignalHashMap = new HashMap<>();
+
+        LOGGER.info("UE localization: " + board.getUeLocalizationHashMap().get(ue));
 
         board.getBtsLocalizationHashMap().forEach((key, value) -> UeSignalHashMap.put(key, LocalizationCalculator.calculateDistance(value, board.getUeLocalizationHashMap().get(ue))));
 

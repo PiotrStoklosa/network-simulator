@@ -25,16 +25,21 @@ public class SignalParserImpl implements SignalParser {
     public String parseUESignalHashMap(Map<BTS, Integer> UeSignalHashMap) {
 
         if (UeSignalHashMap == null)
+        {
+            LOGGER.error("map is null");
             throw new IllegalArgumentException("Map is null");
+        }
+
 
         String json;
 
         try {
-            LOGGER.info("Read value from map: " + UeSignalHashMap);
+            LOGGER.info("map: " + UeSignalHashMap);
 
             json = mapper.writeValueAsString(UeSignalHashMap);
 
             LOGGER.info("Read value from map successfully");
+            LOGGER.info("json:" + json);
 
         } catch (JsonProcessingException e) {
             LOGGER.error(e.getMessage());
