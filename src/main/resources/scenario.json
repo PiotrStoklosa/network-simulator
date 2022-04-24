@@ -1,0 +1,44 @@
+{
+  "btsDescriptions" : [
+    { "name" : "BTS1",
+      "localization" : {
+        "x": 1,
+        "y": 5
+      },
+      "signalPower" : 40},
+    { "name" : "BTS2",
+      "localization" : {
+        "x": 20,
+        "y": 30
+      },
+      "signalPower" : 38}
+  ],
+  "ueScenarios" : [
+    {"ue" : {"name" : "UE1"},
+      "steps" : [
+        { "turn": 10,
+          "localization" : { "x" : 10, "y" : 11},
+          "action" : "START" },
+        { "turn": 12,
+          "localization" : { "x" : 10, "y" : 12},
+          "action" : "MOVE" },
+        { "turn": 15,
+          "localization" : { "x" : 10, "y" : 12},
+          "action" : "END" }
+      ]},
+    {"ue" : {"name" : "UE2"},
+      "steps" : [
+        { "turn": 5,
+          "localization" : { "x" : 20, "y" : 18},
+          "action" : "START" },
+        { "turn": 6,
+          "localization" : { "x" : 22, "y" : 18},
+          "action" : "MOVE" },
+        { "turn": 7,
+          "localization" : { "x" : 24, "y" : 18},
+          "action" : "MOVE" },
+        { "turn": 8,
+          "localization" : { "x" : 24, "y" : 16},
+          "action" : "END" }
+      ]}
+  ]}

@@ -1,0 +1,9 @@
+{
+  "properties": [
+    {
+      "name": "scenario_path",
+      "type": "java.lang.String",
+      "description": "Path to scenario file."
+    }
+  ]
+}
