@@ -8,8 +8,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
 
-import java.util.Queue;
-
 /**
  * Class that performs actions for certain turns.
  *
@@ -75,10 +73,12 @@ public class TurnHandlerImpl implements TurnHandler {
     @Override
     public void findAndDoActionsForThisTurn(int TurnNumber) {
         for (UEScenario ueScenario : scenario.ueScenarios()) {
-            UEStep ueStep = ueScenario.steps().get(0);
-            if (ueStep.turn() == TurnNumber) {
-                doAction(ueScenario, ueStep);
-                ueScenario.steps().remove(0);
+            if (!ueScenario.steps().isEmpty()) {
+                UEStep ueStep = ueScenario.steps().get(0);
+                if (ueStep.turn() == TurnNumber) {
+                    doAction(ueScenario, ueStep);
+                    ueScenario.steps().remove(0);
+                }
             }
         }
     }
