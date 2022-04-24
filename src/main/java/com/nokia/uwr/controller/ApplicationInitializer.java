@@ -33,12 +33,12 @@ public class ApplicationInitializer {
      * @return state after completed process
      * @throws RuntimeException if error occurred during application
      * @author Piotr Stoklosa
-     * @see BoardService#boardInitialize()
+     * @see BoardService#InitialiseBoardAndManageTurns()
      */
     @GetMapping("/")
     @ResponseBody
     public String startApplication() {
-        if (!boardService.boardInitialize()) {
+        if (!boardService.InitialiseBoardAndManageTurns()) {
             LOGGER.error("An error occurred while the application was running");
             throw new RuntimeException("Application did not finish successfully!");
         }
