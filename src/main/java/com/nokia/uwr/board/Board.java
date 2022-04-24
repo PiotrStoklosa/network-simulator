@@ -2,6 +2,7 @@ package com.nokia.uwr.board;
 
 import com.nokia.uwr.model.BTS;
 import com.nokia.uwr.model.UE;
+import lombok.Getter;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Component;
@@ -20,8 +21,11 @@ public class Board {
 
     private static final Logger LOGGER = LogManager.getLogger(Board.class);
 
-    Map<UE, Localization> UeLocalizationHashMap = new HashMap<>();
-    Map<BTS, Localization> BtsLocalizationHashMap = new HashMap<>();
+    @Getter
+    private final Map<UE, Localization> UeLocalizationHashMap = new HashMap<>();
+
+    @Getter
+    private final Map<BTS, Localization> BtsLocalizationHashMap = new HashMap<>();
 
     /**
      * @param bts          BTS object, that we want to add
