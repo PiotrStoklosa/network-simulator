@@ -23,7 +23,6 @@ public class Board {
 
     @Getter
     private final Map<UE, Localization> UeLocalizationHashMap = new HashMap<>();
-
     @Getter
     private final Map<BTS, Localization> BtsLocalizationHashMap = new HashMap<>();
 
