@@ -18,35 +18,31 @@ import java.util.Map;
 @Service
 @RequiredArgsConstructor
 public class SignalParserImpl implements SignalParser {
-    private final ObjectMapper mapper;
     private static final Logger LOGGER = LogManager.getLogger(SignalParserImpl.class);
+    private final ObjectMapper mapper;
 
     @Override
     public String parseUESignalHashMap(Map<BTS, Integer> UeSignalHashMap) {
 
-        if (UeSignalHashMap == null)
-        {
+        if (UeSignalHashMap == null) {
             LOGGER.error("map is null");
             throw new IllegalArgumentException("Map is null");
         }
 
-
         String json;
+        LOGGER.info("map: " + UeSignalHashMap);
 
         try {
-            LOGGER.info("map: " + UeSignalHashMap);
-
             json = mapper.writeValueAsString(UeSignalHashMap);
-
-            LOGGER.info("Read value from map successfully");
-            LOGGER.info("json:" + json);
 
         } catch (JsonProcessingException e) {
             LOGGER.error(e.getMessage());
             throw new RuntimeException();
         }
 
+        LOGGER.info("Read value from map successfully");
+        LOGGER.info("json:" + json);
+
         return json;
     }
 }
-

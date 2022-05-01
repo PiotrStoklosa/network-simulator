@@ -3,7 +3,6 @@ package com.nokia.uwr.service;
 import com.nokia.uwr.board.Board;
 import com.nokia.uwr.model.BTS;
 import com.nokia.uwr.model.UE;
-import com.nokia.uwr.service.parser.SignalParser;
 import com.nokia.uwr.utility.LocalizationCalculator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -37,26 +36,15 @@ public class CalculationSignalServiceImpl implements CalculationSignalService {
      */
     @Override
     public Map<BTS, Integer> calculateSignal(UE ue) {
-        Map<BTS, Integer> UeSignalHashMap = new HashMap<>();
+        Map<BTS, Integer> ueSignalHashMap = new HashMap<>();
 
         LOGGER.info("UE localization: " + board.getUeLocalizationHashMap().get(ue));
 
-        board.getBtsLocalizationHashMap().forEach((key, value) -> UeSignalHashMap.put(key, LocalizationCalculator.calculateDistance(value, board.getUeLocalizationHashMap().get(ue))));
+        board.getBtsLocalizationHashMap().forEach((key, value) -> ueSignalHashMap.put(key, LocalizationCalculator.calculateDistance(value, board.getUeLocalizationHashMap().get(ue))));
 
-        LOGGER.info("calculated signal map: " + UeSignalHashMap);
+        LOGGER.info("calculated signal map: " + ueSignalHashMap);
 
-        return UeSignalHashMap;
+        return ueSignalHashMap;
     }
 
-
 }
-
-
-
-
-
-
-
-
-
-

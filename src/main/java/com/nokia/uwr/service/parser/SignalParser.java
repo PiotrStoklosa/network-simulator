@@ -15,6 +15,5 @@ public interface SignalParser {
      * @return JSON
      * @author Barbara Moczulska
      */
-
     String parseUESignalHashMap(Map<BTS, Integer> UeSignalHashMap);
 }

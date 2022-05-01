@@ -23,18 +23,16 @@ public class LocalizationCalculator {
      * @return distance
      * @author Barbara Moczulska
      */
-
-
     public Integer calculateDistance(Localization a, Localization b) {
 
         LOGGER.info("Distance between points: " + a.toString() + " and " + b.toString());
 
-        int distance = (int) Math.round(Math.sqrt((b.y() - a.y()) * (b.y() - a.y()) + (b.x() - a.x()) * (b.x() - a.x())));
+        int distance = Math.toIntExact(Math.round(Math.sqrt((b.y() - a.y()) * (b.y() - a.y())
+                + (b.x() - a.x()) * (b.x() - a.x()))));
 
         LOGGER.info("counted: " + distance);
 
         return distance;
     }
-
 
 }

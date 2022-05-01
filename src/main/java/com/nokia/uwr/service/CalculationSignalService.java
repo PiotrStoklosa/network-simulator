@@ -20,6 +20,3 @@ public interface CalculationSignalService {
     Map<BTS, Integer> calculateSignal(UE ue);
 
 }
-
-// zalogowanie lokalizacji i sygnału
-// testy
