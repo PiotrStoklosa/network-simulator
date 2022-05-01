@@ -91,7 +91,7 @@ public class BoardServiceImpl implements BoardService {
      * @throws RuntimeException when method do not find number of turns
      * @author Piotr Stoklosa
      */
-     int findMaxTurn(List<UEScenario> ueScenarios) {
+    int findMaxTurn(List<UEScenario> ueScenarios) {
         Optional<Integer> maxTurn = ueScenarios.stream()
                 .map(UEScenario::steps)
                 .flatMap(Collection::stream)
