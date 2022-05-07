@@ -91,14 +91,14 @@ public class BoardServiceImpl implements BoardService {
      * @throws RuntimeException when method do not find number of turns
      * @author Piotr Stoklosa
      */
-    private int findMaxTurn(List<UEScenario> ueScenarios) {
+    int findMaxTurn(List<UEScenario> ueScenarios) {
         Optional<Integer> maxTurn = ueScenarios.stream()
                 .map(UEScenario::steps)
                 .flatMap(Collection::stream)
                 .map(UEStep::turn)
                 .max(Comparator.naturalOrder());
         if (maxTurn.isPresent()) {
-            LOGGER.info("Number of turns: " + maxTurn);
+            LOGGER.info("Number of turns: " + maxTurn.get());
             return maxTurn.get();
         } else {
             LOGGER.error("Did not found number of turns!");
@@ -116,13 +116,17 @@ public class BoardServiceImpl implements BoardService {
     public void simulate(ScenarioSchema scenarioSchema) {
 
         turnHandler.setScenario(scenarioSchema);
-        IntStream.rangeClosed(1, MAX_TURNS).forEach(turn -> {
-                    LOGGER.info("Turn  " + turn + "/" + MAX_TURNS);
+        IntStream.rangeClosed(1, getMaxTurns()).forEach(turn -> {
+                    LOGGER.info("Turn  " + turn + "/" + getMaxTurns());
                     turnHandler.findAndDoActionsForThisTurn(turn);
                     LOGGER.info("Turn ended successfully!");
                 }
         );
 
+    }
+
+    static int getMaxTurns() {
+        return MAX_TURNS;
     }
 
     /**

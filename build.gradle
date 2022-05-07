@@ -24,8 +24,13 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
+    testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.8.2'
     implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.13.2.2'
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
+    implementation 'org.apache.maven.plugins:maven-surefire-plugin:2.22.2'
+    testImplementation 'org.junit.platform:junit-platform-surefire-provider:1.3.2'
+    testImplementation 'org.junit.jupiter:junit-jupiter-params:5.8.2'
+    testImplementation 'org.mockito:mockito-inline:4.5.1'
 }
 
 tasks.named('test') {
