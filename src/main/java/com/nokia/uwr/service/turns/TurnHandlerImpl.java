@@ -79,7 +79,13 @@ public class TurnHandlerImpl implements TurnHandler {
      * @author Barbara Moczulska
      */
     private void endCall(UE ue) {
-        /* TODO */
+        boolean response = apiClient.postEndUEToCallsManagementSystem();
+
+        if(!response){
+            LOGGER.error("Sending a END signal to REST API failed");
+        }
+        else
+            LOGGER.info("Sending a END signal to REST API succeeded");
     }
 
     private void doAction(UEScenario ueScenario, UEStep ueStep) {
