@@ -47,12 +47,11 @@ public class TurnHandlerImpl implements TurnHandler {
      */
     private void startCall(UE ue) {
         boolean response = apiClient.postStartUEToCallsManagementSystem(
-                signalParser.parseUESignalHashMap(calculationSignalService.calculateSignal(ue)));
+                signalParser.parseUESignalHashMap(calculationSignalService.calculateSignal(ue), ue.name()));
 
-        if(!response){
+        if (!response) {
             LOGGER.error("Sending a START signal to REST API failed");
-        }
-        else
+        } else
             LOGGER.info("Sending a START signal to REST API succeeded");
     }
 
@@ -63,12 +62,11 @@ public class TurnHandlerImpl implements TurnHandler {
      */
     private void moveCall(UE ue) {
         boolean response = apiClient.postMoveUEToCallsManagementSystem(
-                signalParser.parseUESignalHashMap(calculationSignalService.calculateSignal(ue)));
+                signalParser.parseUESignalHashMap(calculationSignalService.calculateSignal(ue), ue.name()));
 
-        if(!response){
+        if (!response) {
             LOGGER.error("Sending a MOVE signal to REST API failed");
-        }
-        else
+        } else
             LOGGER.info("Sending a MOVE signal to REST API succeeded");
     }
 
@@ -79,12 +77,12 @@ public class TurnHandlerImpl implements TurnHandler {
      * @author Barbara Moczulska
      */
     private void endCall(UE ue) {
-        boolean response = apiClient.postEndUEToCallsManagementSystem();
+        boolean response = apiClient.postEndUEToCallsManagementSystem(
+                signalParser.parseUESignalHashMap(calculationSignalService.calculateSignal(ue), ue.name()));
 
-        if(!response){
+        if (!response) {
             LOGGER.error("Sending a END signal to REST API failed");
-        }
-        else
+        } else
             LOGGER.info("Sending a END signal to REST API succeeded");
     }
 

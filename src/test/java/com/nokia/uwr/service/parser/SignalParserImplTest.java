@@ -32,7 +32,7 @@ class SignalParserImplTest {
                 "\"BTS[name=4, signalPower=7]\":3" +
                 "}";
 
-        Assertions.assertEquals(signalParser.parseUESignalHashMap(map), x);
+        Assertions.assertEquals(signalParser.parseUESignalHashMap(map,"UE"), x);
 
     }
 }

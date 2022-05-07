@@ -1,8 +1,11 @@
 package com.nokia.uwr.service.parser;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.nokia.uwr.model.BTS;
+import com.nokia.uwr.model.UE;
 import lombok.RequiredArgsConstructor;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -22,27 +25,40 @@ public class SignalParserImpl implements SignalParser {
     private final ObjectMapper mapper;
 
     @Override
-    public String parseUESignalHashMap(Map<BTS, Integer> UeSignalHashMap) {
+    public String parseUESignalHashMap(Map<BTS, Integer> UeSignalHashMap, String ueName) {
 
         if (UeSignalHashMap == null) {
             LOGGER.error("map is null");
             throw new IllegalArgumentException("Map is null");
         }
 
-        String json;
+        String json = "";
+        ObjectMapper objectMapper = new ObjectMapper();
+
         LOGGER.info("map: " + UeSignalHashMap);
 
-        try {
-            json = mapper.writeValueAsString(UeSignalHashMap);
-
-        } catch (JsonProcessingException e) {
-            LOGGER.error(e.getMessage());
-            throw new RuntimeException();
-        }
+//        try {
+//            json = mapper.writeValueAsString(UeSignalHashMap);
+//
+//        } catch (JsonProcessingException e) {
+//            LOGGER.error(e.getMessage());
+//            throw new RuntimeException();
+//        }
 
         LOGGER.info("Read value from map successfully");
-        LOGGER.info("json:" + json);
 
+        try {
+            ObjectNode list = mapper.createObjectNode();
+            list.put("name", ueName);
+            list.set("signals", mapper.valueToTree(UeSignalHashMap));
+
+            json = list.toPrettyString();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        LOGGER.info("json:" + json);
         return json;
     }
 }
