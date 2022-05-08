@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
  * Class that performs actions for certain turns.
  *
  * @author najedzony
+ * @author Barbara Moczulska
  */
 @Service
 public class TurnHandlerImpl implements TurnHandler {
@@ -77,8 +78,7 @@ public class TurnHandlerImpl implements TurnHandler {
      * @author Barbara Moczulska
      */
     private void endCall(UE ue) {
-        boolean response = apiClient.postEndUEToCallsManagementSystem(
-                signalParser.parseUESignalHashMap(calculationSignalService.calculateSignal(ue), ue.name()));
+        boolean response = apiClient.postEndUEToCallsManagementSystem(ue.name());
 
         if (!response) {
             LOGGER.error("Sending a END signal to REST API failed");
