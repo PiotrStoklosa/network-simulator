@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.Map;
 
 /**
- * Class to parse HashMap into JSON
+ * Class to parse UE name and HashMap into JSON
  *
  * @author Barbara Moczulska
  */

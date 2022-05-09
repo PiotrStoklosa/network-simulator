@@ -1,5 +1,7 @@
 package com.nokia.uwr.service.turns;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.nokia.uwr.board.Board;
 import com.nokia.uwr.model.UE;
 import com.nokia.uwr.scenario.ScenarioSchema;
@@ -78,7 +80,11 @@ public class TurnHandlerImpl implements TurnHandler {
      * @author Barbara Moczulska
      */
     private void endCall(UE ue) {
-        boolean response = apiClient.postEndUEToCallsManagementSystem(ue.name());
+
+        ObjectNode node = new ObjectMapper().createObjectNode();
+        node.put("name", ue.name());
+
+        boolean response = apiClient.postEndUEToCallsManagementSystem(node.toString());
 
         if (!response) {
             LOGGER.error("Sending a END signal to REST API failed");

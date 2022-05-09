@@ -13,6 +13,7 @@ class SignalParserImplTest {
 
 
     SignalParser signalParser;
+
     @Autowired
     public SignalParserImplTest(SignalParser signalParser) {
         this.signalParser = signalParser;
@@ -27,12 +28,12 @@ class SignalParserImplTest {
                 new BTS("4", 7), 3);
 
         String x = "{\"name\":\"UE3\"," +
-                    "\"signals\":{\"BTS[name=1, signalPower=1]\":1," +
-                                "\"BTS[name=2, signalPower=2]\":6," +
-                                "\"BTS[name=3, signalPower=5]\":7," +
-                                "\"BTS[name=4, signalPower=7]\":3}}";
+                "\"signals\":{\"BTS[name=1, signalPower=1]\":1," +
+                            "\"BTS[name=2, signalPower=2]\":6," +
+                            "\"BTS[name=3, signalPower=5]\":7," +
+                            "\"BTS[name=4, signalPower=7]\":3}}";
 
-        Assertions.assertEquals(signalParser.parseUESignalHashMap(map,"UE3"), x);
+        Assertions.assertEquals(signalParser.parseUESignalHashMap(map, "UE3"), x);
 
     }
 }
