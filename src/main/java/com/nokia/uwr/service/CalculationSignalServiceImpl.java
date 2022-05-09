@@ -18,7 +18,7 @@ import java.util.Map;
 @Service
 public class CalculationSignalServiceImpl implements CalculationSignalService {
 
-    Board board;
+    private final Board board;
     private static final Logger LOGGER = LogManager.getLogger(CalculationSignalServiceImpl.class);
 
     @Autowired
