@@ -42,4 +42,12 @@ public interface APIClient {
      */
     boolean postInitializeToCallsManagementSystem(String body);
 
+    /**
+     * Send request to end connection
+     *
+     * @return true if request proceed successfully, otherwise false
+     * @author Piotr Stoklosa
+     */
+    boolean postTerminateToCallsManagementSystem();
+
 }
