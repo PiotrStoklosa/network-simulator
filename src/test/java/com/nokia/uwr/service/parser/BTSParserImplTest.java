@@ -1,5 +1,6 @@
 package com.nokia.uwr.service.parser;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nokia.uwr.board.Localization;
 import com.nokia.uwr.scenario.bts.BTSDescription;
 import org.junit.jupiter.api.Assertions;
@@ -10,7 +11,7 @@ import java.util.List;
 
 class BTSParserImplTest {
 
-    private final BTSParserImpl btsParserImpl = new BTSParserImpl();
+    private final BTSParserImpl btsParserImpl = new BTSParserImpl(new ObjectMapper());
 
     @Test
     public void shouldProperlyParseBTSDescriptions() {

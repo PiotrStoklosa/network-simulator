@@ -2,6 +2,7 @@ package com.nokia.uwr.service.parser;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nokia.uwr.scenario.bts.BTSDescription;
+import lombok.AllArgsConstructor;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
@@ -15,11 +16,12 @@ import java.util.List;
  * @author Piotr Stoklosa
  */
 @Service
+@AllArgsConstructor
 public class BTSParserImpl implements BTSParser {
 
     private static final Logger LOGGER = LogManager.getLogger(BTSParserImpl.class);
 
-    ObjectMapper mapper = new ObjectMapper();
+    ObjectMapper mapper;
 
     /**
      * Main implementation
