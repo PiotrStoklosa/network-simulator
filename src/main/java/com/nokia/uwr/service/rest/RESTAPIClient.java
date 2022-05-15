@@ -15,7 +15,10 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
 /**
+ * Main implementation of APIClient
+ *
  * @author Piotr Stoklosa
+ * @see APIClient
  */
 @Component
 public class RESTAPIClient implements APIClient {
@@ -23,31 +26,66 @@ public class RESTAPIClient implements APIClient {
     private static final Logger LOGGER = LogManager.getLogger(RESTAPIClient.class);
     private final String callsManagementSystemPath;
     private static final String ueEndpoint = "/api/ue/";
+    private static final String initializerEndpoint = "/api/initializer/";
 
     @Autowired
     public RESTAPIClient(Environment environment) {
         callsManagementSystemPath = environment.getProperty("calls_management_system_path");
     }
 
+    /**
+     * Main implementation
+     *
+     * @author Piotr Stoklosa
+     */
+    @Override
     public boolean postStartUEToCallsManagementSystem(String body) {
-        return postToCallsManagementSystem(body, UEAction.START);
+        return postUEActionToCallsManagementSystem(body, UEAction.START);
     }
 
+    /**
+     * Main implementation
+     *
+     * @author Piotr Stoklosa
+     */
+    @Override
     public boolean postMoveUEToCallsManagementSystem(String body) {
-        return postToCallsManagementSystem(body, UEAction.MOVE);
+        return postUEActionToCallsManagementSystem(body, UEAction.MOVE);
     }
 
+    /**
+     * Main implementation
+     *
+     * @author Piotr Stoklosa
+     */
+    @Override
     public boolean postEndUEToCallsManagementSystem(String body) {
-        return postToCallsManagementSystem(body, UEAction.END);
+        return postUEActionToCallsManagementSystem(body, UEAction.END);
     }
 
-    private boolean postToCallsManagementSystem(String body, UEAction ueAction) {
+    private boolean postUEActionToCallsManagementSystem(String body, UEAction ueAction) {
 
-        LOGGER.info("Proceeding post request to ");
+        return postToCallsManagementSystem(body, callsManagementSystemPath + ueEndpoint + ueAction.name());
+
+    }
+
+    /**
+     * Main implementation
+     *
+     * @author Piotr Stoklosa
+     */
+    @Override
+    public boolean postInitializeToCallsManagementSystem(String body) {
+        return postToCallsManagementSystem(body, initializerEndpoint);
+    }
+
+    private boolean postToCallsManagementSystem(String body, String endpoint) {
+
+        LOGGER.info("Proceeding post request to calls-management-system");
 
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(callsManagementSystemPath + ueEndpoint + ueAction.name()))
+                .uri(URI.create(endpoint))
                 .POST(HttpRequest.BodyPublishers.ofString(body))
                 .build();
 
@@ -57,13 +95,14 @@ public class RESTAPIClient implements APIClient {
                     client.send(request, HttpResponse.BodyHandlers.ofString());
         } catch (IOException | InterruptedException exc) {
             LOGGER.error("Error occurred during post method to calls-management-system");
+            LOGGER.error(exc.getMessage());
             return false;
         }
         if (response.statusCode() == HttpStatus.SC_OK) {
             LOGGER.info("Post UE method ended successfully!");
             return true;
         } else {
-            LOGGER.error("Post UE method ended with error, status code: !" + response.statusCode());
+            LOGGER.error("Post UE method ended with error, status code: " + response.statusCode());
             return false;
         }
 
