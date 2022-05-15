@@ -5,19 +5,15 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.nokia.uwr.board.Board;
 import com.nokia.uwr.model.UE;
 import com.nokia.uwr.scenario.ScenarioSchema;
-import com.nokia.uwr.scenario.bts.BTSDescription;
 import com.nokia.uwr.scenario.ue.UEScenario;
 import com.nokia.uwr.scenario.ue.UEStep;
 import com.nokia.uwr.service.CalculationSignalServiceImpl;
-import com.nokia.uwr.service.parser.BTSParser;
 import com.nokia.uwr.service.parser.SignalParserImpl;
 import com.nokia.uwr.service.rest.APIClient;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 /**
  * Class that performs actions for certain turns.
@@ -35,18 +31,15 @@ public class TurnHandlerImpl implements TurnHandler {
     private final APIClient apiClient;
     private final SignalParserImpl signalParser;
     private final CalculationSignalServiceImpl calculationSignalService;
-    private final BTSParser btsParser;
 
     @Autowired
     public TurnHandlerImpl(Board board,
                            APIClient apiClient,
                            SignalParserImpl signalParser,
-                           BTSParser btsParser,
                            CalculationSignalServiceImpl calculationSignalService) {
         this.board = board;
         this.apiClient = apiClient;
         this.signalParser = signalParser;
-        this.btsParser = btsParser;
         this.calculationSignalService = calculationSignalService;
     }
 
