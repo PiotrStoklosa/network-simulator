@@ -51,35 +51,6 @@ public class TurnHandlerImpl implements TurnHandler {
     }
 
     /**
-     * Main implementation
-     *
-     * @author Piotr Stoklosa
-     */
-    public void initializeCall(List<BTSDescription> descriptionList) {
-        boolean response = apiClient.postInitializeToCallsManagementSystem(
-                btsParser.parseBTSDescriptions(descriptionList));
-
-        if (!response) {
-            LOGGER.error("Sending a initialization signal to REST API failed");
-        } else
-            LOGGER.info("Sending a initialization signal to REST API succeeded");
-    }
-
-    /**
-     * Main implementation
-     *
-     * @author Piotr Stoklosa
-     */
-    public void terminateCall() {
-        boolean response = apiClient.postTerminateToCallsManagementSystem();
-
-        if (!response) {
-            LOGGER.error("Termination signal to REST API failed");
-        } else
-            LOGGER.info("Termination signal to REST API succeeded");
-    }
-
-    /**
      * Function that sends a signal to REST API client about start of a new UE call.
      *
      * @author najedzony

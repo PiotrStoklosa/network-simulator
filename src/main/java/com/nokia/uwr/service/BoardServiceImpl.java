@@ -39,6 +39,7 @@ public class BoardServiceImpl implements BoardService {
     private final Environment env;
     private final Board board;
     private final TurnHandler turnHandler;
+    private final ConnectionHandler connectionHandler;
 
     private static int MAX_TURNS;
 
@@ -46,11 +47,13 @@ public class BoardServiceImpl implements BoardService {
     public BoardServiceImpl(ScenarioFileParser scenarioFileParser,
                             Environment env,
                             Board board,
-                            TurnHandler turnHandler) {
+                            TurnHandler turnHandler,
+                            ConnectionHandler connectionHandler) {
         this.scenarioFileParser = scenarioFileParser;
         this.env = env;
         this.board = board;
         this.turnHandler = turnHandler;
+        this.connectionHandler = connectionHandler;
     }
 
     /**
@@ -115,7 +118,7 @@ public class BoardServiceImpl implements BoardService {
     @Override
     public void simulate(ScenarioSchema scenarioSchema) {
 
-        turnHandler.initializeCall(scenarioSchema.btsDescriptions());
+        connectionHandler.initializeCall(scenarioSchema.btsDescriptions());
         turnHandler.setScenario(scenarioSchema);
         IntStream.rangeClosed(1, getMaxTurns()).forEach(turn -> {
                     LOGGER.info("Turn  " + turn + "/" + getMaxTurns());
@@ -123,7 +126,7 @@ public class BoardServiceImpl implements BoardService {
                     LOGGER.info("Turn ended successfully!");
                 }
         );
-        turnHandler.terminateCall();
+        connectionHandler.terminateCall();
 
     }
 

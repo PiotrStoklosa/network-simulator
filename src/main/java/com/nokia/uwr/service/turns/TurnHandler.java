@@ -14,21 +14,6 @@ import java.util.List;
 public interface TurnHandler {
 
     /**
-     * Create connection between network-simulator and calls-management-system
-     *
-     * @param descriptionList descriptionList needed to properly initialize board on calls-management-system side.
-     * @author Piotr Stoklosa
-     */
-    void initializeCall(List<BTSDescription> descriptionList);
-
-    /**
-     * Terminate connection between network-simulator and calls-management-system
-     *
-     * @author Piotr Stoklosa
-     */
-    void terminateCall();
-
-    /**
      * @param TurnNumber Turn number that we want to find and perform actions for.
      * @author najedzony
      */
