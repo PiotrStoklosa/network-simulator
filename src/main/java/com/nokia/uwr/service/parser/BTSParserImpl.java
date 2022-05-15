@@ -1,12 +1,12 @@
 package com.nokia.uwr.service.parser;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nokia.uwr.scenario.bts.BTSDescription;
-import lombok.RequiredArgsConstructor;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.boot.configurationprocessor.json.JSONArray;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -15,10 +15,11 @@ import java.util.List;
  * @author Piotr Stoklosa
  */
 @Service
-@RequiredArgsConstructor
 public class BTSParserImpl implements BTSParser {
 
     private static final Logger LOGGER = LogManager.getLogger(BTSParserImpl.class);
+
+    ObjectMapper mapper = new ObjectMapper();
 
     /**
      * Main implementation
@@ -30,10 +31,18 @@ public class BTSParserImpl implements BTSParser {
 
         if (descriptions == null) throw new IllegalArgumentException("descriptions is null");
 
+        String json;
         LOGGER.info("Creating JSON from BTS descriptions...");
-        String json = new JSONArray(descriptions).toString();
-        LOGGER.info("JSON created successfully!");
 
+        try {
+            json = mapper.writeValueAsString(descriptions);
+
+        } catch (IOException e) {
+            LOGGER.error(e.getMessage());
+            return null;
+        }
+
+        LOGGER.info("JSON created successfully!");
         return json;
     }
 }
