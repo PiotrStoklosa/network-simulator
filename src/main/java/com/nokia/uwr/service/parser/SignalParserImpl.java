@@ -2,7 +2,6 @@ package com.nokia.uwr.service.parser;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import com.nokia.uwr.model.BTS;
 import lombok.RequiredArgsConstructor;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -22,7 +21,7 @@ public class SignalParserImpl implements SignalParser {
     private final ObjectMapper mapper;
 
     @Override
-    public String parseUESignalHashMap(Map<BTS, Integer> UeSignalHashMap, String ueName) {
+    public String parseUESignalHashMap(Map<String, Integer> UeSignalHashMap, String ueName) {
 
         if (UeSignalHashMap == null) {
             LOGGER.error("map is null");

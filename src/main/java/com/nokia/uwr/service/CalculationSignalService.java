@@ -17,6 +17,6 @@ public interface CalculationSignalService {
      *
      * @author Barbara Moczulska
      */
-    Map<BTS, Integer> calculateSignal(UE ue);
+    Map<String, Integer> calculateSignal(UE ue);
 
 }

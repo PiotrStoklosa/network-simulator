@@ -1,8 +1,5 @@
 package com.nokia.uwr.service.parser;
 
-import com.nokia.uwr.model.BTS;
-import com.nokia.uwr.model.UE;
-
 import java.util.Map;
 
 /**
@@ -17,5 +14,5 @@ public interface SignalParser {
      * @return JSON
      * @author Barbara Moczulska
      */
-    String parseUESignalHashMap(Map<BTS, Integer> UeSignalHashMap, String ueName);
+    String parseUESignalHashMap(Map<String, Integer> UeSignalHashMap, String ueName);
 }

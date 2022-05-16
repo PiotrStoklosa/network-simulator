@@ -35,12 +35,13 @@ public class CalculationSignalServiceImpl implements CalculationSignalService {
      * @author Barbara Moczulska
      */
     @Override
-    public Map<BTS, Integer> calculateSignal(UE ue) {
-        Map<BTS, Integer> ueSignalHashMap = new HashMap<>();
+    public Map<String, Integer> calculateSignal(UE ue) {
+        Map<String, Integer> ueSignalHashMap = new HashMap<>();
 
         LOGGER.info("UE localization: " + board.getUeLocalizationHashMap().get(ue));
 
-        board.getBtsLocalizationHashMap().forEach((key, value) -> ueSignalHashMap.put(key, LocalizationCalculator.calculateDistance(value, board.getUeLocalizationHashMap().get(ue))));
+        board.getBtsLocalizationHashMap().forEach((key, value) -> ueSignalHashMap.put(key.name(),
+                LocalizationCalculator.calculateDistance(value, board.getUeLocalizationHashMap().get(ue))));
 
         LOGGER.info("calculated signal map: " + ueSignalHashMap);
 
