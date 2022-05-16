@@ -21,7 +21,7 @@ public class BTSParserImpl implements BTSParser {
 
     private static final Logger LOGGER = LogManager.getLogger(BTSParserImpl.class);
 
-    ObjectMapper mapper;
+    private final ObjectMapper mapper;
 
     /**
      * Main implementation
@@ -34,7 +34,7 @@ public class BTSParserImpl implements BTSParser {
         if (descriptions == null) throw new IllegalArgumentException("descriptions is null");
 
         String json;
-        LOGGER.info("Creating JSON from BTS descriptions...");
+        LOGGER.info("Creating JSON from BTS descriptions..." + descriptions);
 
         try {
             json = mapper.writeValueAsString(descriptions);

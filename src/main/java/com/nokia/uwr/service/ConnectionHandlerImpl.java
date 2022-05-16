@@ -21,8 +21,8 @@ public class ConnectionHandlerImpl implements ConnectionHandler {
 
     private static final Logger LOGGER = LogManager.getLogger(ConnectionHandlerImpl.class);
 
-    APIClient apiClient;
-    BTSParser btsParser;
+    private final APIClient apiClient;
+    private final BTSParser btsParser;
 
     /**
      * Main implementation
