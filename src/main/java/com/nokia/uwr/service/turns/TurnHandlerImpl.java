@@ -33,14 +33,15 @@ public class TurnHandlerImpl implements TurnHandler {
     private final CalculationSignalServiceImpl calculationSignalService;
 
     @Autowired
-    public TurnHandlerImpl(Board board, APIClient apiClient,
-                           SignalParserImpl signalParser, CalculationSignalServiceImpl calculationSignalService) {
+    public TurnHandlerImpl(Board board,
+                           APIClient apiClient,
+                           SignalParserImpl signalParser,
+                           CalculationSignalServiceImpl calculationSignalService) {
         this.board = board;
         this.apiClient = apiClient;
         this.signalParser = signalParser;
         this.calculationSignalService = calculationSignalService;
     }
-
 
     /**
      * Function that sends a signal to REST API client about start of a new UE call.

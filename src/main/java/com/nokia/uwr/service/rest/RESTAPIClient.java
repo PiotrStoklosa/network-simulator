@@ -27,6 +27,8 @@ public class RESTAPIClient implements APIClient {
     private final String callsManagementSystemPath;
     private static final String ueEndpoint = "/api/ue/";
     private static final String initializerEndpoint = "/api/initializer/";
+    private static final String terminateEndpoint = "/api/terminator/";
+    private static final String EMPTY = "{}";
 
     @Autowired
     public RESTAPIClient(Environment environment) {
@@ -77,6 +79,16 @@ public class RESTAPIClient implements APIClient {
     @Override
     public boolean postInitializeToCallsManagementSystem(String body) {
         return postToCallsManagementSystem(body, initializerEndpoint);
+    }
+
+    /**
+     * Main implementation
+     *
+     * @author Piotr Stoklosa
+     */
+    @Override
+    public boolean postTerminateToCallsManagementSystem() {
+        return postToCallsManagementSystem(EMPTY, terminateEndpoint);
     }
 
     private boolean postToCallsManagementSystem(String body, String endpoint) {
