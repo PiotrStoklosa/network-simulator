@@ -122,19 +122,16 @@ public class TurnHandlerImpl implements TurnHandler {
 
     @Override
     public void findAndDoActionsForThisTurn(int TurnNumber) {
-        for (UEScenario ueScenario : scenario.ueScenarios()) {
-            if (!ueScenario.steps().isEmpty()) {
-                UEStep ueStep = ueScenario.steps().get(0);
-                if (ueStep.turn() == TurnNumber) {
-                    doAction(ueScenario, ueStep);
-                    ueScenario.steps().remove(0);
-                }
-            }
-        }
+
+        scenario.ueScenarios()
+                .forEach(ueScenario -> ueScenario.steps().stream()
+                        .filter(ueStep -> ueStep.turn() == TurnNumber
+                        ).forEach(ueStep -> doAction(ueScenario, ueStep)));
     }
 
     @Override
     public void setScenario(ScenarioSchema scenario) {
         this.scenario = scenario;
     }
+
 }
