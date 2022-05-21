@@ -25,14 +25,25 @@ public class RESTAPIClient implements APIClient {
 
     private static final Logger LOGGER = LogManager.getLogger(RESTAPIClient.class);
     private final String callsManagementSystemPath;
-    private static final String ueEndpoint = "/api/ue/";
-    private static final String initializerEndpoint = "/api/initializer/";
-    private static final String terminateEndpoint = "/api/terminator/";
+    private static final String ueEndpoint = "/api/calls/ue/";
+    private static final String initializerEndpoint = "/api/calls/initializer/";
+    private static final String terminateEndpoint = "/api/calls/terminator/";
+    private static final String newTurnEndpoint = "/api/calls/turn/";
     private static final String EMPTY = "{}";
 
     @Autowired
     public RESTAPIClient(Environment environment) {
         callsManagementSystemPath = environment.getProperty("calls_management_system_path");
+    }
+
+    /**
+     * Main implementation
+     *
+     * @author Piotr Stoklosa
+     */
+    @Override
+    public boolean postStartNewTurnToCallsManagementSystem(String body) {
+        return postToCallsManagementSystem(body, newTurnEndpoint);
     }
 
     /**

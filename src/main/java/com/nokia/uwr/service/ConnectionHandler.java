@@ -17,13 +17,13 @@ public interface ConnectionHandler {
      * @param descriptionList descriptionList needed to properly initialize board on calls-management-system side.
      * @author Piotr Stoklosa
      */
-    void initializeCall(List<BTSDescription> descriptionList);
+    void initializeCMS(List<BTSDescription> descriptionList);
 
     /**
      * Terminate connection between network-simulator and calls-management-system
      *
      * @author Piotr Stoklosa
      */
-    void terminateCall();
+    void terminateCMS();
 
 }

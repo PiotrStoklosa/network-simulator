@@ -29,7 +29,7 @@ public class ConnectionHandlerImpl implements ConnectionHandler {
      *
      * @author Piotr Stoklosa
      */
-    public void initializeCall(List<BTSDescription> descriptionList) {
+    public void initializeCMS(List<BTSDescription> descriptionList) {
         boolean response = apiClient.postInitializeToCallsManagementSystem(
                 btsParser.parseBTSDescriptions(descriptionList));
 
@@ -44,7 +44,7 @@ public class ConnectionHandlerImpl implements ConnectionHandler {
      *
      * @author Piotr Stoklosa
      */
-    public void terminateCall() {
+    public void terminateCMS() {
         boolean response = apiClient.postTerminateToCallsManagementSystem();
 
         if (!response) {
