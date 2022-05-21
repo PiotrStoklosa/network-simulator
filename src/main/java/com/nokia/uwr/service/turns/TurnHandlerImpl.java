@@ -15,8 +15,6 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
-
 /**
  * Class that performs actions for certain turns.
  *
@@ -125,13 +123,9 @@ public class TurnHandlerImpl implements TurnHandler {
     public void findAndDoActionsForThisTurn(int TurnNumber) {
 
         scenario.ueScenarios()
-                .forEach(ueScenario -> scenario.ueScenarios().stream()
-                        .filter(ueScenario1 -> ueScenario1.ue() == ueScenario.ue())
-                        .map(UEScenario::steps)
-                        .flatMap(Collection::stream)
-                        .filter(ueStep -> ueStep.turn() == TurnNumber)
-                        .forEach(ueStep -> doAction(ueScenario, ueStep))
-                );
+                .forEach(ueScenario -> ueScenario.steps().stream()
+                        .filter(ueStep -> ueStep.turn() == TurnNumber
+                        ).forEach(ueStep -> doAction(ueScenario, ueStep)));
     }
 
     @Override
