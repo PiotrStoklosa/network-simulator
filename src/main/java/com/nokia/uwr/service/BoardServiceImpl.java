@@ -118,15 +118,16 @@ public class BoardServiceImpl implements BoardService {
     @Override
     public void simulate(ScenarioSchema scenarioSchema) {
 
-        connectionHandler.initializeCall(scenarioSchema.btsDescriptions());
+        connectionHandler.initializeCMS(scenarioSchema.btsDescriptions());
         turnHandler.setScenario(scenarioSchema);
         IntStream.rangeClosed(1, getMaxTurns()).forEach(turn -> {
                     LOGGER.info("Turn  " + turn + "/" + getMaxTurns());
+                    turnHandler.initializeTurn(turn);
                     turnHandler.findAndDoActionsForThisTurn(turn);
                     LOGGER.info("Turn ended successfully!");
                 }
         );
-        connectionHandler.terminateCall();
+        connectionHandler.terminateCMS();
 
     }
 

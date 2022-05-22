@@ -24,15 +24,26 @@ import java.net.http.HttpResponse;
 public class RESTAPIClient implements APIClient {
 
     private static final Logger LOGGER = LogManager.getLogger(RESTAPIClient.class);
-    private final String callsManagementSystemPath;
-    private static final String ueEndpoint = "/api/ue/";
-    private static final String initializerEndpoint = "/api/initializer/";
-    private static final String terminateEndpoint = "/api/terminator/";
+    private final String CALLS_MANAGEMENT_SYSTEM_PATH;
+    private static final String UE_ENDPOINT = "/api/calls/";
+    private static final String INITIALIZER_ENDPOINT = "/api/initializer/";
+    private static final String TERMINATE_ENDPOINT = "/api/terminator/";
+    private static final String NEW_TURN_ENDPOINT = "/api/turn/";
     private static final String EMPTY = "{}";
 
     @Autowired
     public RESTAPIClient(Environment environment) {
-        callsManagementSystemPath = environment.getProperty("calls_management_system_path");
+        CALLS_MANAGEMENT_SYSTEM_PATH = environment.getProperty("calls_management_system_path");
+    }
+
+    /**
+     * Main implementation
+     *
+     * @author Piotr Stoklosa
+     */
+    @Override
+    public boolean postStartNewTurnToCallsManagementSystem(String body) {
+        return postToCallsManagementSystem(body, NEW_TURN_ENDPOINT);
     }
 
     /**
@@ -67,7 +78,7 @@ public class RESTAPIClient implements APIClient {
 
     private boolean postUEActionToCallsManagementSystem(String body, UEAction ueAction) {
 
-        return postToCallsManagementSystem(body, callsManagementSystemPath + ueEndpoint + ueAction.name());
+        return postToCallsManagementSystem(body, CALLS_MANAGEMENT_SYSTEM_PATH + UE_ENDPOINT + ueAction.name());
 
     }
 
@@ -78,7 +89,7 @@ public class RESTAPIClient implements APIClient {
      */
     @Override
     public boolean postInitializeToCallsManagementSystem(String body) {
-        return postToCallsManagementSystem(body, initializerEndpoint);
+        return postToCallsManagementSystem(body, INITIALIZER_ENDPOINT);
     }
 
     /**
@@ -88,7 +99,7 @@ public class RESTAPIClient implements APIClient {
      */
     @Override
     public boolean postTerminateToCallsManagementSystem() {
-        return postToCallsManagementSystem(EMPTY, terminateEndpoint);
+        return postToCallsManagementSystem(EMPTY, TERMINATE_ENDPOINT);
     }
 
     private boolean postToCallsManagementSystem(String body, String endpoint) {

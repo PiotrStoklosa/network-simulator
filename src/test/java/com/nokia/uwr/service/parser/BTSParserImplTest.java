@@ -35,8 +35,6 @@ class BTSParserImplTest {
                 "{\"x\":20,\"y\":30}," +
                 "\"signalPower\":38}]";
 
-        System.out.println();
-
         // when
         String result = btsParserImpl.parseBTSDescriptions(bts);
 
