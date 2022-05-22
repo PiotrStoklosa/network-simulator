@@ -1,9 +1,6 @@
 package com.nokia.uwr.service.turns;
 
 import com.nokia.uwr.scenario.ScenarioSchema;
-import com.nokia.uwr.scenario.bts.BTSDescription;
-
-import java.util.List;
 
 /**
  * Interface for classes that performs actions for certain turns.
@@ -12,6 +9,12 @@ import java.util.List;
  */
 
 public interface TurnHandler {
+
+    /**
+     * @param turnNumber Turn number.
+     * @author Piotr Stoklosa
+     */
+    void initializeTurn(int turnNumber);
 
     /**
      * @param TurnNumber Turn number that we want to find and perform actions for.
