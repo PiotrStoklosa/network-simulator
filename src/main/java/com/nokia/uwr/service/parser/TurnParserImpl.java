@@ -7,6 +7,8 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Main implementation
@@ -20,6 +22,7 @@ public class TurnParserImpl implements TurnParser {
 
     private final ObjectMapper mapper;
 
+
     /**
      * Main implementation
      *
@@ -30,9 +33,12 @@ public class TurnParserImpl implements TurnParser {
 
         String json;
         LOGGER.info("Parsing turn " + turnNumber);
+        Map<String, Integer> turnJson = new HashMap<>();
+        turnJson.put("turnNumber", turnNumber);
 
         try {
-            json = mapper.writeValueAsString(turnNumber);
+
+            json = mapper.writeValueAsString(turnJson);
 
         } catch (IOException e) {
             LOGGER.error(e.getMessage());
