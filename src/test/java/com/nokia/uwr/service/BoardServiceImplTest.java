@@ -23,6 +23,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.env.Environment;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
@@ -93,6 +94,8 @@ class BoardServiceImplTest {
     ScenarioFileParser scenarioFileParser;
     @Mock
     Board board;
+    @Mock
+    ConnectionHandler connectionHandler;
     @InjectMocks
     BoardServiceImpl boardServiceWithMocks;
 
@@ -100,7 +103,8 @@ class BoardServiceImplTest {
     @MethodSource("provideListsNumberOfInvocationsInSimulation")
     void shouldSimulateTurns(int turns) {
         Mockito.lenient().when(BoardServiceImpl.getMaxTurns()).thenReturn(turns);
-        boardServiceWithMocks.simulate(Mockito.any());
+        Mockito.lenient().doNothing().when(connectionHandler).initializeCMS(Mockito.any());
+        boardServiceWithMocks.simulate(new ScenarioSchema(new ArrayList<>(), new ArrayList<>()));
         Mockito.verify(turnHandler, times(turns)).findAndDoActionsForThisTurn(Mockito.anyInt());
     }
 
