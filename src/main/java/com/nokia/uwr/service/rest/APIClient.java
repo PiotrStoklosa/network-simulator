@@ -6,6 +6,16 @@ package com.nokia.uwr.service.rest;
  * @author Piotr Stoklosa
  */
 public interface APIClient {
+
+    /**
+     * Send request to initialize new turn
+     *
+     * @param body request content
+     * @return true if request proceed successfully, otherwise false
+     * @author Piotr Stoklosa
+     */
+    boolean postStartNewTurnToCallsManagementSystem(String body);
+
     /**
      * Send request to initialize UE
      *

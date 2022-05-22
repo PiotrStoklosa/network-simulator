@@ -9,6 +9,7 @@ import com.nokia.uwr.scenario.ue.UEScenario;
 import com.nokia.uwr.scenario.ue.UEStep;
 import com.nokia.uwr.service.CalculationSignalServiceImpl;
 import com.nokia.uwr.service.parser.SignalParserImpl;
+import com.nokia.uwr.service.parser.TurnParser;
 import com.nokia.uwr.service.rest.APIClient;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -31,16 +32,19 @@ public class TurnHandlerImpl implements TurnHandler {
     private final APIClient apiClient;
     private final SignalParserImpl signalParser;
     private final CalculationSignalServiceImpl calculationSignalService;
+    private final TurnParser turnParser;
 
     @Autowired
     public TurnHandlerImpl(Board board,
                            APIClient apiClient,
                            SignalParserImpl signalParser,
-                           CalculationSignalServiceImpl calculationSignalService) {
+                           CalculationSignalServiceImpl calculationSignalService,
+                           TurnParser turnParser) {
         this.board = board;
         this.apiClient = apiClient;
         this.signalParser = signalParser;
         this.calculationSignalService = calculationSignalService;
+        this.turnParser = turnParser;
     }
 
     /**
@@ -118,6 +122,17 @@ public class TurnHandlerImpl implements TurnHandler {
                 }
             }
         }
+    }
+
+    @Override
+    public void initializeTurn(int turnNumber) {
+        boolean response = apiClient.postStartNewTurnToCallsManagementSystem(
+                turnParser.parseTurn(turnNumber));
+
+        if (!response) {
+            LOGGER.error("Sending a initialization turn signal to REST API failed");
+        } else
+            LOGGER.info("Sending a initialization turn signal to REST API succeeded");
     }
 
     @Override
