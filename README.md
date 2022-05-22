@@ -3,7 +3,7 @@
 ## Hi!
 Simulator is an application that simulate network environment.
 
-## Project parts
+## Project moduls
 
 1. [network-simulator](https://github.com/PiotrStoklosa/network-simulator)
 
