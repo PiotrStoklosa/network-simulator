@@ -122,6 +122,7 @@ public class BoardServiceImpl implements BoardService {
         turnHandler.setScenario(scenarioSchema);
         IntStream.rangeClosed(1, getMaxTurns()).forEach(turn -> {
                     LOGGER.info("Turn  " + turn + "/" + getMaxTurns());
+                    turnHandler.initializeTurn(turn);
                     turnHandler.findAndDoActionsForThisTurn(turn);
                     LOGGER.info("Turn ended successfully!");
                 }

@@ -31,7 +31,7 @@ public class BTSParserImpl implements BTSParser {
     @Override
     public String parseBTSDescriptions(List<BTSDescription> descriptions) throws IllegalArgumentException {
 
-        if (descriptions == null) throw new IllegalArgumentException("descriptions is null"); // catch
+        if (descriptions == null) throw new IllegalArgumentException("descriptions is null");
 
         String json;
         LOGGER.info("Creating JSON from BTS descriptions..." + descriptions);
