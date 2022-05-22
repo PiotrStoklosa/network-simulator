@@ -10,6 +10,7 @@ import com.nokia.uwr.scenario.ue.UEScenario;
 import com.nokia.uwr.scenario.ue.UEStep;
 import com.nokia.uwr.service.CalculationSignalServiceImpl;
 import com.nokia.uwr.service.parser.SignalParserImpl;
+import com.nokia.uwr.service.parser.TurnParserImpl;
 import com.nokia.uwr.service.rest.APIClient;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -36,7 +37,8 @@ class TurnHandlerImplTest {
         APIClient apiClient = mock(APIClient.class);
         SignalParserImpl signalParser = mock(SignalParserImpl.class);
         CalculationSignalServiceImpl calculationSignalService = mock(CalculationSignalServiceImpl.class);
-        turnHandler = new TurnHandlerImpl(board, apiClient, signalParser, calculationSignalService);
+        TurnParserImpl turnParser = mock(TurnParserImpl.class);
+        turnHandler = new TurnHandlerImpl(board, apiClient, signalParser, calculationSignalService, turnParser);
         localizationForAddingUe1 = new Localization(10, 11);
         localizationForAddingUe2 = new Localization(20, 18);
         localizationForUpdatingUe1 = new Localization(10, 12);
