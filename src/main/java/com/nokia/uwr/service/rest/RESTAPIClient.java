@@ -2,6 +2,12 @@ package com.nokia.uwr.service.rest;
 
 import com.nokia.uwr.scenario.ue.UEAction;
 import org.apache.commons.httpclient.HttpStatus;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.ContentType;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,10 +15,6 @@ import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
-import java.net.URI;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
 
 /**
  * Main implementation of APIClient
@@ -43,7 +45,7 @@ public class RESTAPIClient implements APIClient {
      */
     @Override
     public boolean postStartNewTurnToCallsManagementSystem(String body) {
-        return postToCallsManagementSystem(body, NEW_TURN_ENDPOINT);
+        return postToCallsManagementSystem(body, CALLS_MANAGEMENT_SYSTEM_PATH + NEW_TURN_ENDPOINT);
     }
 
     /**
@@ -89,7 +91,7 @@ public class RESTAPIClient implements APIClient {
      */
     @Override
     public boolean postInitializeToCallsManagementSystem(String body) {
-        return postToCallsManagementSystem(body, INITIALIZER_ENDPOINT);
+        return postToCallsManagementSystem(body, CALLS_MANAGEMENT_SYSTEM_PATH + INITIALIZER_ENDPOINT);
     }
 
     /**
@@ -99,36 +101,34 @@ public class RESTAPIClient implements APIClient {
      */
     @Override
     public boolean postTerminateToCallsManagementSystem() {
-        return postToCallsManagementSystem(EMPTY, TERMINATE_ENDPOINT);
+        return postToCallsManagementSystem(EMPTY, CALLS_MANAGEMENT_SYSTEM_PATH + TERMINATE_ENDPOINT);
     }
 
     private boolean postToCallsManagementSystem(String body, String endpoint) {
 
         LOGGER.info("Proceeding post request to calls-management-system");
 
-        HttpClient client = HttpClient.newHttpClient();
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(endpoint))
-                .POST(HttpRequest.BodyPublishers.ofString(body))
-                .build();
+        StringEntity entity = new StringEntity(body,
+                ContentType.APPLICATION_JSON);
 
-        HttpResponse<String> response;
+        CloseableHttpClient httpClient = HttpClientBuilder.create().build();
+        HttpPost request = new HttpPost(endpoint);
+        request.setEntity(entity);
+        CloseableHttpResponse response;
         try {
-            response =
-                    client.send(request, HttpResponse.BodyHandlers.ofString());
-        } catch (IOException | InterruptedException exc) {
+            response = httpClient.execute(request);
+        } catch (IOException exc) {
             LOGGER.error("Error occurred during post method to calls-management-system");
             LOGGER.error(exc.getMessage());
             return false;
         }
-        if (response.statusCode() == HttpStatus.SC_OK) {
+        if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
             LOGGER.info("Post UE method ended successfully!");
             return true;
         } else {
-            LOGGER.error("Post UE method ended with error, status code: " + response.statusCode());
+            LOGGER.error("Post UE method ended with error, status code: " + response.getStatusLine().getStatusCode());
             return false;
         }
-
     }
 
 }
