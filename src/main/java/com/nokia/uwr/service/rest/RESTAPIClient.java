@@ -30,7 +30,7 @@ public class RESTAPIClient implements APIClient {
     private static final String UE_ENDPOINT = "/api/calls/";
     private static final String INITIALIZER_ENDPOINT = "/api/initializer/";
     private static final String TERMINATE_ENDPOINT = "/api/terminator/";
-    private static final String NEW_TURN_ENDPOINT = "/api/turn/";
+    private static final String NEW_TURN_ENDPOINT = "/api/turns/";
     private static final String EMPTY = "{}";
 
     @Autowired
