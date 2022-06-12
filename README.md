@@ -23,14 +23,13 @@ Simulator is an application that simulate network environment.
 
 ## How to set up this app locally
 ### Docker
-1. Install JDK-17 and Gradle 7.4.2
-2. Install Docker. If you are using Windows you can download for instance Docker Desktop application available here: https://docs.docker.com/desktop/windows/install/
-3. Change directory to root of project
-4. Run ```gradle build```
-5. When gradle task is complete, run  ```docker build --build-arg JAR_FILE=build/libs/\*.jar -t network-simulator .```
+1, Set up and run calls-management-system project first
+2. Change directory to root of this project (network-simulator)
+3. Run ```gradle build```
+4. When gradle task is complete, run  ```docker build --build-arg JAR_FILE=build/libs/\*.jar -t network-simulator .```
 ## How to run an app
 ### Docker
-1. Run ```docker run -p 8081:8081 network-simulator ```
+1. Run ```docker run --net ns-cms-network -p 8081:8081 network-simulator ```
 2. The application is now running and available at the http://localhost:8081
 ## Instruction for users
 
