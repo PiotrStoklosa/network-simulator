@@ -23,7 +23,7 @@ Simulator is an application that simulate network environment.
 
 ## How to set up this app locally
 ### Docker
-1, Set up and run calls-management-system project first
+1. Set up and run calls-management-system project first
 2. Change directory to root of this project (network-simulator)
 3. Run ```gradle build```
 4. When gradle task is complete, run  ```docker build --build-arg JAR_FILE=build/libs/\*.jar -t network-simulator .```
