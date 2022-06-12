@@ -105,7 +105,7 @@ public class RESTAPIClient implements APIClient {
     }
 
     private boolean postToCallsManagementSystem(String body, String endpoint) {
-
+        endpoint = endpoint.toLowerCase();
         LOGGER.info("Proceeding post request to calls-management-system");
 
         StringEntity entity = new StringEntity(body,
