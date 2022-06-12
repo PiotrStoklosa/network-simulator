@@ -8,19 +8,17 @@ import com.nokia.uwr.scenario.ue.UEScenario;
 import com.nokia.uwr.scenario.ue.UEStep;
 import com.nokia.uwr.service.parser.ScenarioFileParser;
 import com.nokia.uwr.service.turns.TurnHandler;
+import com.nokia.uwr.utility.ResourceHandler;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
-import org.springframework.util.ResourceUtils;
 
-import java.io.File;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.IntStream;
 
@@ -64,16 +62,15 @@ public class BoardServiceImpl implements BoardService {
      */
     @Override
     public boolean InitialiseBoardAndManageTurns() {
-        File scenario;
         String path = env.getProperty("scenario_path");
+        String json;
         try {
-            scenario = ResourceUtils.getFile(Objects.requireNonNull(
-                    this.getClass().getResource(Objects.requireNonNull(path))));
+            json = ResourceHandler.loadResource(path);
         } catch (Exception e) {
             LOGGER.error("Error occurred during obtaining a file! Path: " + path + " , exception: " + e.getMessage());
             return false;
         }
-        ScenarioSchema scenarioSchema = scenarioFileParser.parseJSONFile(scenario);
+        ScenarioSchema scenarioSchema = scenarioFileParser.parseJSONString(json);
         if (scenarioSchema == null) {
             return false;
         }

@@ -7,18 +7,16 @@ import com.nokia.uwr.scenario.bts.BTSDescription;
 import com.nokia.uwr.scenario.ue.UEAction;
 import com.nokia.uwr.scenario.ue.UEScenario;
 import com.nokia.uwr.scenario.ue.UEStep;
+import com.nokia.uwr.utility.ResourceHandler;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.util.ResourceUtils;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 @SpringBootTest
 class ScenarioFileParserImplTest {
@@ -61,10 +59,9 @@ class ScenarioFileParserImplTest {
         ScenarioSchema returned;
 
         try {
-            File resource = ResourceUtils.getFile(Objects.requireNonNull(
-                    this.getClass().getResource(correctFile)));
+            String resource = ResourceHandler.loadResource(correctFile);
 
-            returned = scenarioFileParser.parseJSONFile(resource);
+            returned = scenarioFileParser.parseJSONString(resource);
         } catch (Exception e) {
             LOGGER.error(e.getMessage());
             returned = null;
@@ -80,10 +77,9 @@ class ScenarioFileParserImplTest {
         ScenarioSchema returned;
 
         try {
-            File resource = ResourceUtils.getFile(Objects.requireNonNull(
-                    this.getClass().getResource(incorrectFile)));
+            String resource = ResourceHandler.loadResource(incorrectFile);
 
-            returned = scenarioFileParser.parseJSONFile(resource);
+            returned = scenarioFileParser.parseJSONString(resource);
         } catch (Exception e) {
             LOGGER.error(e.getMessage());
             returned = null;

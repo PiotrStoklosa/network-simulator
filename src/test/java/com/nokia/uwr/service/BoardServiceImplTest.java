@@ -132,7 +132,7 @@ class BoardServiceImplTest {
         String correctFilePath = "scenario_path";
         Mockito.lenient().doNothing().when(turnHandler).findAndDoActionsForThisTurn(Mockito.anyInt());
         Mockito.lenient().when(mockedEnvironment.getProperty("scenario_path")).thenReturn(environment.getProperty(correctFilePath));
-        Mockito.lenient().when(scenarioFileParser.parseJSONFile(Mockito.any())).thenReturn(null);
+        Mockito.lenient().when(scenarioFileParser.parseJSONString(Mockito.any())).thenReturn(null);
         Assertions.assertFalse(boardServiceWithMocks.InitialiseBoardAndManageTurns());
     }
 
@@ -150,7 +150,7 @@ class BoardServiceImplTest {
         Mockito.lenient().when(mockedEnvironment.getProperty("scenario_path")).thenReturn(environment.getProperty(correctFilePath));
         Mockito.lenient().when(ueStep5.turn()).thenReturn(5);
         Mockito.lenient().when(ueScenario.steps()).thenReturn(List.of(ueStep5));
-        Mockito.lenient().when(scenarioFileParser.parseJSONFile(Mockito.any())).thenReturn(new ScenarioSchema(
+        Mockito.lenient().when(scenarioFileParser.parseJSONString(Mockito.any())).thenReturn(new ScenarioSchema(
                 List.of(btsDescription),
                 List.of(ueScenario)));
         Mockito.lenient().when(board.getBtsLocalizationHashMap()).thenReturn(new HashMap<>());
