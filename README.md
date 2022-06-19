@@ -11,26 +11,21 @@ Simulator is an application that simulate network environment.
 2. [calls-management-system](https://github.com/PiotrStoklosa/calls-management-system)
 
 
-3. statistics-and-results-module
-
+3. [statistics-and-results-report](https://hackmd.io/@yTKMIFmVQSuLpuxpJ1_ppQ/HJhTCzpF9) <br>
+  InfluxDB included in this project.<br>
+  Comparisons between two different implemetations of algorithm and conclusions (at now only in polish language).<br>
 
 
 ## Table of contents
-* [How to set up this app locally](#How-to-set-up-this-app-locally)
-* [How to run an app](#How-to-run-an-app)
+* [How to set up and run this app locally](#How-to-set-up-and-run-this-app-locally)
 * [Instruction for users](#Instruction-for-users)
 * [Documentation for programmers](#Documentation-for-programmers)
 
-## How to set up this app locally
-### Docker
-1. Set up and run calls-management-system project first
-2. Change directory to root of this project (network-simulator)
-3. Run ```gradle build```
-4. When gradle task is complete, run  ```docker build --build-arg JAR_FILE=build/libs/\*.jar -t network-simulator .```
-## How to run an app
-### Docker
-1. Run ```docker run --net ns-cms-network -p 8081:8081 network-simulator ```
-2. The application is now running and available at the http://localhost:8081
+## How to set up and run this app locally
+1. Set up and run calls-management-system project first.
+2. Run ```gradle build```
+3. Run network-simulator.
+
 ## Instruction for users
 
 ## Documentation for programmers
