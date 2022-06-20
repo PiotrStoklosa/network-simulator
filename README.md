@@ -25,6 +25,7 @@ Simulator is an application that simulate network environment.
 1. Set up and run calls-management-system project first.
 2. Run ```gradle build```
 3. Run network-simulator.
+4. Application is running on port 8081.
 
 ## Instruction for users
 
